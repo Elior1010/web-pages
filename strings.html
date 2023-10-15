@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Secret Message Page</title>
+    <style>
+        /* Add your CSS styles for a nice look and feel here */
+        body {
+            background-color: #f0f0f0;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+        }
+        /* Add more styles as needed */
+    </style>
+</head>
+<body>
+    <h1>Welcome to the Secret Message Page</h1>
+    
+    <!-- Form for user input -->
+    <form id="userForm">
+        <!-- Input for first name -->
+        <label for="firstName">First Name:</label>
+        <input type="text" id="firstName" name="firstName" required>
+        <br>
+        
+        <!-- Input for last name -->
+        <label for="lastName">Last Name:</label>
+        <input type="text" id="lastName" name="lastName" required>
+        <br>
+        
+        <!-- Input for zip code -->
+        <label for="zipCode">Zip Code:</label>
+        <input type="text" id="zipCode" name="zipCode" required pattern="\d{5}" title="Enter a valid 5-digit zip code">
+        <br>
+        
+        <!-- Submit button -->
+        <input type="submit" value="Submit">
+    </form>
+    
+    <!-- Display area for secret message -->
+    <div id="secretMessage" style="display: none;">
+        <h2>Secret Message:</h2>
+        <p>This is the secret message that you can access!</p>
+    </div>
+
+    <!-- JavaScript code for validation and displaying the secret message -->
+    <script>
+        // Function to validate user input and display the secret message
+        function validateAndDisplay() {
+            // Get user input values
+            var firstName = document.getElementById('firstName').value;
+            var lastName = document.getElementById('lastName').value;
+            var zipCode = document.getElementById('zipCode').value;
+
+            // Combine first name and last name
+            var fullName = firstName + ' ' + lastName;
+
+            // Check input lengths and zip code format
+            if (fullName.length > 20) {
+                alert('Full name is too long! Maximum length is 20 characters.');
+            } else if (!/^\d{5}$/.test(zipCode)) {
+                alert('Zip code must be exactly 5 digits.');
+            } else {
+                // Hide the form and display the secret message
+                document.getElementById('userForm').style.display = 'none';
+                document.getElementById('secretMessage').style.display = 'block';
+            }
+        }
+
+        // Add event listener to the form's submit button
+        document.getElementById('userForm').addEventListener('submit', function (event) {
+            event.preventDefault(); // Prevent form submission
+            validateAndDisplay(); // Call the validation function
+        });
+    </script>
+</body>
+</html>
